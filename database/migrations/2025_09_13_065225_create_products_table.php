@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->json('images')->nullable();
+            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
+            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->text('description')->nullable();
             $table->decimal('price', 10, 2);
             $table->integer('stock')->default(0);
@@ -23,8 +25,6 @@ return new class extends Migration
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_stock')->default(true);
             $table->boolean('on_sale')->default(false);
-            $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->timestamps();
         });
     }
